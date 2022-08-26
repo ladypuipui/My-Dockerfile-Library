@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  terraform:
+    build:
+      context: ./docker
+    image: terraform
+    container_name: terraform
+    volumes:
+      - ./:/terraform:cached
+      - $HOME/.awsvault:/root/.awsvault:ro
+      - $HOME/.aws:/root/.aws:ro
+      - $HOME/.gnupg:/root/.gnupg:rw
+      - $HOME/.password-store:/root/.password-store:rw
+    env_file: .env
+    working_dir: /terraform
+    tty: true
